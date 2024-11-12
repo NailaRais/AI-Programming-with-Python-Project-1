@@ -4,7 +4,7 @@
 #                                                                             
 # PROGRAMMER: Naila Rais
 # DATE CREATED: 11/12/2024                                 
-# REVISED DATE: 
+# REVISED DATE:
 # PURPOSE: Create a function classify_images that uses the classifier function 
 #          to create the classifier labels and then compares the classifier 
 #          labels to the pet image labels. This function inputs:
@@ -65,20 +65,31 @@ def classify_images(images_dir, results_dic, model):
      Returns:
            None - results_dic is mutable data type so no return needed.         
     """
-    
-       
     for key in results_dic:
-               model_label = classifier(images_dir + key, model)
-               model_label = model_label.lower().strip()
-               truth = results_dic[key][0]
-               if truth in model_label:
-                    results_dic[key].extend((model_label, 1))
-               else:
-                    results_dic[key].extend((model_label, 0))
-                                
-
-                    
-               
-
+        model_label = ""
+        classified = classifier(images_dir + key,model)
+ 
+        low_pet_image = classified.lower()
         
+
+        word_list_pet_image = low_pet_image
+        """
+        pet_name = ""
         
+        for word in word_list_pet_image:
+            if word.isalpha():
+                pet_name += word + " " """
+        low_pet_image = low_pet_image.strip()
+        #print("Classifier: " + low_pet_image)
+        model_label = low_pet_image
+        
+        #results_dic[key].append(model_label)
+        truth = results_dic[key][0]
+        
+        # Classifier Label
+        if truth in model_label:
+           results_dic[key].extend((model_label,1))
+        else:
+           results_dic[key].extend((model_label,0))
+        
+    print(results_dic)

@@ -14,15 +14,14 @@
 #          The results_dic dictionary has a 'key' that's the image filename and
 #          a 'value' that's a list. This list will contain the following item
 #          at index 0 : pet image label (string).
-#
-##
-# Imports python modules
+
+## Imports python modules
 from os import listdir
 
-# TODO 2: Define get_pet_labels function below please be certain to replace None
-#       in the return statement with results_dic dictionary that you create 
-#       with this function
-# 
+# Define get_pet_labels function below please be certain to replace None
+# in the return statement with results_dic dictionary that you create 
+# with this function
+
 def get_pet_labels(image_dir):
     """
     Creates a dictionary of pet labels (results_dic) based upon the filenames 
@@ -74,5 +73,5 @@ def get_pet_labels(image_dir):
                       "already exists in results_dic with value =", 
                       results_dic[filename])
 
-    # Replace None with the results_dic dictionary that you created with this function
+    # Return the results_dic dictionary that was created with this function
     return results_dic
