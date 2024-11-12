@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dog Breed Classifier</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    header {
+      padding: 20px;
+      background-color: #333;
+      color: white;
+    }
+    .container {
+      padding: 20px;
+    }
+    .upload-form {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      background-color: white;
+      display: inline-block;
+      border-radius: 5px;
+    }
+    .upload-form input[type="file"],
+    .upload-form select,
+    .upload-form button {
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 1em;
+    }
+    .results {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #333;
+    }
+    footer {
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Dog Breed Classifier</h1>
+    <p>Upload an image of a dog to classify its breed using different models.</p>
+  </header>
+
+  <div class="container">
+    <form id="uploadForm" class="upload-form" enctype="multipart/form-data">
+      <label for="imageUpload">Select a Dog Image:</label>
+      <input type="file" id="imageUpload" name="image" accept="image/*" required>
+      
+      <label for="model">Choose a Model:</label>
+      <select id="model" name="model">
+        <option value="resnet">ResNet</option>
+        <option value="alexnet">AlexNet</option>
+        <option value="vgg">VGG</option>
+      </select>
+      
+      <button type="submit">Classify Image</button>
+    </form>
+
+    <div id="results" class="results"></div>
+  </div>
+
+  <footer>
+    <p>Created by [Your Name]. Support us on GitHub, Open Collective, and other platforms!</p>
+  </footer>
+
+  <script>
+    document.getElementById('uploadForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      
+      const formData = new FormData();
+      const fileInput = document.getElementById('imageUpload');
+      const modelSelect = document.getElementById('model');
+      formData.append('image', fileInput.files[0]);
+      formData.append('model', modelSelect.value);
+
+      try {
+        const response = await fetch('/classify', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!response.ok) {
+          throw new Error('Classification failed');
+        }
+
+        const result = await response.json();
+        document.getElementById('results').innerText = `Result: ${result.label}, Confidence: ${result.confidence}`;
+      } catch (error) {
+        document.getElementById('results').innerText = `Error: ${error.message}`;
+      }
+    });
+  </script>
+</body>
+</html>
