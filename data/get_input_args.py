@@ -44,19 +44,29 @@ def get_input_args():
     # Creates parse 
     parser = argparse.ArgumentParser()
 
-    # Creates 3 command line arguments args.dir for path to images files,
-    # args.arch which CNN model to use for classification, args.labels path to
-    # text file with names of dogs.
-    parser.add_argument('--dir', type=str, default='pet_images/', 
-                        help='path to folder of images')
-    # TODO: 1a. EDIT parse.add_argument statements BELOW to add type & help for:
-    #          --arch - the CNN model architecture
-    #          --dogfile - text file of names of dog breeds
-    parser.add_argument('--arch', type=str, default='vgg', 
-                        help='CNN model architecture to use for classification')
-    parser.add_argument('--dogfile', type=str, default='dognames.txt', 
-                        help='text file with names of dog breeds')
+     # Create 3 command line arguments as mentioned above using add_argument() from ArguementParser method
+    
+    # Argument 1
+    parser.add_argument('--dir', type = str, default = 'pet_images/',
+                        help = 'path to the folder of pet images')
+    
+    # Argument 2
+    parser.add_argument('--arch', type = str, default = 'vgg',
+                        help = 'enter an architecture')
+  
+        
+    parser.add_argument('--dogfile', type = str, default = 'dognames.txt',
+                        help = 'file that contains dognames')
+    
+    # Assigns variable in_args to parse_args()
+#     in_args = parser.parse_args()
 
-    # TODO: 1b. Replace None with parser.parse_args() parsed argument 
-    # collection that you created with this function 
+    # Accesses values of Argument 1 by printing it
+#     print("Argument 1:", in_args.dir)
+#     print("Argument 2:", in_args.arch)
+#     print("Argument 3:", in_args.dogfile)
+    
+    
+    # Replace None with parser.parse_args() parsed argument collection that 
+    # you created with this function 
     return parser.parse_args()
